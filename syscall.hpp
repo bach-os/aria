@@ -20,11 +20,17 @@ struct SyscallRet {
 constexpr int SYSCALL_LOG = 0;
 constexpr int SYSCALL_PORTAL = 1;
 constexpr int SYSCALL_YIELD = 2;
+constexpr int SYSCALL_NOTIFICATION_ACTION = 3;
+constexpr int SYSCALL_NOTIFICATION_DEFINE_STACK = 4;
+constexpr int SYSCALL_NOTIFICATION_RETURN = 5;
 
 inline constexpr Syscall SYSCALLS[] = {
     {SYSCALL_LOG, 1},
     {SYSCALL_PORTAL, 2},
-    {SYSCALL_YIELD, 0}
+    {SYSCALL_YIELD, 0},
+    {SYSCALL_NOTIFICATION_ACTION, 3},
+    {SYSCALL_NOTIFICATION_DEFINE_STACK, 2},
+    {SYSCALL_NOTIFICATION_RETURN, 0}
 };
 
 template<typename... Args>

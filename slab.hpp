@@ -212,27 +212,27 @@ public:
 			return roundedSize;
 		} (size);
 
-		if (roundedSize <= 32) {
+		if (roundedSize == 32) {
 			return cache32.AllocObject();
-		} else if (roundedSize <= 64) {
+		} else if (roundedSize == 64) {
 			return cache64.AllocObject();
-		} else if (roundedSize <= 128) {
+		} else if (roundedSize == 128) {
 			return cache128.AllocObject();
-		} else if (roundedSize <= 256) {
+		} else if (roundedSize == 256) {
 			return cache256.AllocObject();
-		} else if (roundedSize <= 512) {
+		} else if (roundedSize == 512) {
 			return cache512.AllocObject();
-		} else if (roundedSize <= 1024) {
+		} else if (roundedSize == 1024) {
 			return cache1024.AllocObject();
-		} else if (roundedSize <= 2048) {
+		} else if (roundedSize == 2048) {
 			return cache2048.AllocObject();
-		} else if (roundedSize <= 4096) {
+		} else if (roundedSize == 4096) {
 			return cache4096.AllocObject();
-		} else if (roundedSize <= 8192) {
+		} else if (roundedSize == 8192) {
 			return cache8192.AllocObject();
-		} else if (roundedSize <= 16384) {
+		} else if (roundedSize == 16384) {
 			return cache16384.AllocObject();
-		} else if (roundedSize <= 32768) {
+		} else if (roundedSize == 32768) {
 			return cache32768.AllocObject();
 		} else {
 			return nullptr;
