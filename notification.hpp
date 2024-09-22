@@ -2,9 +2,13 @@
 #define FAYT_NOTIFICATION_HPP_
 
 namespace fayt {
+
+struct NotificationInfo {
+
+}; 
 	
 struct NotificationAction {
-	void (*handler)(int);
+	void (*handler)(struct NotificationInfo*, void*, int);
 };
 
 }
