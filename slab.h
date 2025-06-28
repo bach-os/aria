@@ -1,7 +1,7 @@
-#ifndef FAYT_SLAB_H_
-#define FAYT_SLAB_H_
+#ifndef ARIA_SLAB_H_
+#define ARIA_SLAB_H_
 
-#include <fayt/lock.h>
+#include <aria/lock.h>
 
 #include <stdint.h>
 #include <stddef.h>

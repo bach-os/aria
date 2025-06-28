@@ -1,5 +1,5 @@
-#ifndef FAYT_PAIRING_HEAP_
-#define FAYT_PAIRING_HEAP_
+#ifndef ARIA_PAIRING_HEAP_
+#define ARIA_PAIRING_HEAP_
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -33,6 +33,9 @@ void pairing_heap_insert(struct pairing_heap *heap,
 						 struct pairing_heap_node *node);
 /* Get whatever is at the top of the heap and removes it */
 struct pairing_heap_node *pairing_heap_pop(struct pairing_heap *heap);
+
+void pairing_heap_remove(struct pairing_heap *heap,
+						 struct pairing_heap_node *node);
 
 /* Get whatever is at the top of the heap without removing it */
 struct pairing_heap_node *pairing_heap_top(struct pairing_heap *heap);

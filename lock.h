@@ -1,5 +1,5 @@
-#ifndef FAYT_LOCK_H_
-#define FAYT_LOCK_H_
+#ifndef ARIA_LOCK_H_
+#define ARIA_LOCK_H_
 
 #include <stdbool.h>
 

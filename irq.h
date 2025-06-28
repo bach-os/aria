@@ -1,7 +1,7 @@
-#ifndef FAYT_IRQ_H_
-#define FAYT_IRQ_H_
+#ifndef ARIA_IRQ_H_
+#define ARIA_IRQ_H_
 
-#include <fayt/lock.h>
+#include <aria/lock.h>
 
 #include <stdint.h>
 

@@ -1,7 +1,7 @@
-#ifndef FAYT_ELF_H_
-#define FAYT_ELF_H_
+#ifndef ARIA_ELF_H_
+#define ARIA_ELF_H_
 
-#include <fayt/aslr.h>
+#include <aria/aslr.h>
 
 #include <stdint.h>
 #include <stddef.h>

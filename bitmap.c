@@ -1,7 +1,7 @@
-#include <fayt/slab.h>
-#include <fayt/bitmap.h>
-#include <fayt/string.h>
-#include <fayt/debug.h>
+#include <aria/slab.h>
+#include <aria/bitmap.h>
+#include <aria/string.h>
+#include <aria/debug.h>
 
 int bitmap_alloc(struct bitmap *bitmap, int *ret)
 {

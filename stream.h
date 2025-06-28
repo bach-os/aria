@@ -1,7 +1,7 @@
-#ifndef FAYT_STREAM_H_
-#define FAYT_STREAM_H_
+#ifndef ARIA_STREAM_H_
+#define ARIA_STREAM_H_
 
-#include <fayt/lock.h>
+#include <aria/lock.h>
 #include <stdarg.h>
 
 struct stream_info {

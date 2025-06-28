@@ -1,6 +1,6 @@
-#include <fayt/stream.h>
-#include <fayt/string.h>
-#include <fayt/compiler.h>
+#include <aria/stream.h>
+#include <aria/string.h>
+#include <aria/compiler.h>
 
 static void sprint_write(struct stream_info *, char);
 

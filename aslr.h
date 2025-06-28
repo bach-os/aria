@@ -1,5 +1,5 @@
-#ifndef FAYT_ASLR_H_
-#define FAYT_ASLR_H_
+#ifndef ARIA_ASLR_H_
+#define ARIA_ASLR_H_
 
 #include <stdint.h>
 #include <stddef.h>

@@ -1,5 +1,5 @@
-#ifndef FAYT_PCI_H_
-#define FAYT_PCI_H_
+#ifndef ARIA_PCI_H_
+#define ARIA_PCI_H_
 
 #include <stdint.h>
 #include <stddef.h>

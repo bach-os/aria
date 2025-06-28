@@ -1,8 +1,8 @@
-#include <fayt/notification.h>
-#include <fayt/syscall.h>
-#include <fayt/address.h>
-#include <fayt/debug.h>
-#include <fayt/string.h>
+#include <aria/notification.h>
+#include <aria/syscall.h>
+#include <aria/address.h>
+#include <aria/debug.h>
+#include <aria/string.h>
 
 #ifndef DUFAY
 

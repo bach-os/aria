@@ -1,7 +1,7 @@
-#include <fayt/slab.h>
-#include <fayt/string.h>
-#include <fayt/dictionary.h>
-#include <fayt/debug.h>
+#include <aria/slab.h>
+#include <aria/string.h>
+#include <aria/dictionary.h>
+#include <aria/debug.h>
 
 static uint64_t fnv_hash(char *data, size_t byte_cnt)
 {

@@ -1,7 +1,7 @@
-#ifndef FAYT_ADDRESS_H_
-#define FAYT_ADDRESS_H_
+#ifndef ARIA_ADDRESS_H_
+#define ARIA_ADDRESS_H_
 
-#include <fayt/capability.h>
+#include <aria/capability.h>
 
 #include <stddef.h>
 #include <stdint.h>

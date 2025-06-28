@@ -17,7 +17,7 @@ struct circular_queue {
 	// is to allow polling for the items available in a thread
 	// safe manner.
 	size_t items;
-} __attribute__((packed));
+};
 
 int circular_queue_init(struct circular_queue *queue, int data_offset,
 						size_t size, size_t obj_size);

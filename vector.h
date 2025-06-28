@@ -1,7 +1,7 @@
-#ifndef FAYT_VECTOR_H_
-#define FAYT_VECTOR_H_
+#ifndef ARIA_VECTOR_H_
+#define ARIA_VECTOR_H_
 
-#include <fayt/slab.h>
+#include <aria/slab.h>
 
 #define VECTOR(TYPE)            \
 	struct {                    \

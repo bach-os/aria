@@ -1,5 +1,5 @@
-#ifndef FAYT_BITMAP_H_
-#define FAYT_BITMAP_H_
+#ifndef ARIA_BITMAP_H_
+#define ARIA_BITMAP_H_
 
 #include <stdint.h>
 #include <stdbool.h>

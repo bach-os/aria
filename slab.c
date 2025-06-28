@@ -1,8 +1,8 @@
-#include <fayt/slab.h>
-#include <fayt/string.h>
-#include <fayt/lock.h>
-#include <fayt/compiler.h>
-#include <fayt/debug.h>
+#include <aria/slab.h>
+#include <aria/string.h>
+#include <aria/lock.h>
+#include <aria/compiler.h>
+#include <aria/debug.h>
 
 static struct slab *cache_alloc_slab(struct cache *);
 static void *slab_alloc(struct slab *);

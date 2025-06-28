@@ -1,7 +1,7 @@
-#ifndef FAYT_RB_TREE_H_
-#define FAYT_RB_TREE_H_
+#ifndef ARIA_RB_TREE_H_
+#define ARIA_RB_TREE_H_
 
-#include <fayt/bst.h>
+#include <aria/bst.h>
 
 #define BLACK 0
 #define RED 1

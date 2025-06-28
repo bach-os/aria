@@ -1,8 +1,8 @@
-#ifndef FAYT_NOTIFICATION_H_
-#define FAYT_NOTIFICATION_H_
+#ifndef ARIA_NOTIFICATION_H_
+#define ARIA_NOTIFICATION_H_
 
-#include <fayt/capability.h>
-#include <fayt/sched.h>
+#include <aria/capability.h>
+#include <aria/sched.h>
 
 constexpr int NOTIFY_WEIGHT_SCHEDULED = (1 << 0);
 constexpr int NOTIFY_WEIGHT_TICK = (1 << 1);

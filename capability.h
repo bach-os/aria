@@ -1,5 +1,5 @@
-#ifndef FAYT_HANDLE_H_
-#define FAYT_HANDLE_H_
+#ifndef ARIA_HANDLE_H_
+#define ARIA_HANDLE_H_
 
 #include <stdint.h>
 

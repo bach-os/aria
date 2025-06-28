@@ -1,4 +1,4 @@
-#include <fayt/debug.h>
+#include <aria/debug.h>
 #include <stdint.h>
 
 struct ub_source_location {
@@ -169,4 +169,14 @@ void __ubsan_handle_invalid_builtin(struct ub_invalid_builtin_data *data)
 {
 	panic("ubsan: [%s]: \"%s\": at %d:%d", data->location.file,
 		  "invalid builtin", data->location.line, data->location.column);
+}
+
+void __ubsan_handle_function_type_mismatch(
+	struct ub_type_mismatch_v1_data *data, uintptr_t ptr)
+{
+	panic(
+		"ubsan: [%s]: \"%s\": ptr [%x] on [%s] at %d:%d | NULL {%s}, MISALIGNED {%s}",
+		data->location.file, "ptr mismatch", ptr, data->type->name,
+		data->location.line, data->location.column, !ptr ? "TRUE" : "FALSE",
+		(ptr & ((1 << data->log_alignment) - 1)) ? "TRUE" : "FALSE");
 }

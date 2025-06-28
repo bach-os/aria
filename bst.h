@@ -1,5 +1,5 @@
-#ifndef FAYT_BST_H_
-#define FAYT_BST_H_
+#ifndef ARIA_BST_H_
+#define ARIA_BST_H_
 
 #define BST_GENERIC_INSERT(TABLE_ROOT, BASE, NODE)    \
 	({                                                \

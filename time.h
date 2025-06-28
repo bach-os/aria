@@ -1,5 +1,5 @@
-#ifndef FAYT_TIME_H_
-#define FAYT_TIME_H_
+#ifndef ARIA_TIME_H_
+#define ARIA_TIME_H_
 
 #include <stdint.h>
 #include <stddef.h>

@@ -1,7 +1,7 @@
-#include <fayt/circular_queue.h>
-#include <fayt/string.h>
-#include <fayt/slab.h>
-#include <fayt/debug.h>
+#include <aria/circular_queue.h>
+#include <aria/string.h>
+#include <aria/slab.h>
+#include <aria/debug.h>
 
 int circular_queue_init(struct circular_queue *queue, int data_offset,
 						size_t size, size_t obj_size)

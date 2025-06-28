@@ -1,5 +1,5 @@
-#ifndef FAYT_DICTIONARY_H_
-#define FAYT_DICTIONARY_H_
+#ifndef ARIA_DICTIONARY_H_
+#define ARIA_DICTIONARY_H_
 
 #include <stddef.h>
 #include <stdint.h>

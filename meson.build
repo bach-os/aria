@@ -1,0 +1,13 @@
+src += files('address.c', 
+'aslr.c', 
+'bitmap.c',
+'circular_queue.c',
+'dictionary.c',
+'elf.c',
+'pairing_heap.c',
+'slab.c',
+'stream.c',
+'string.c',
+'notification.c',
+'time.c',
+'ubsan.c')

@@ -1,10 +1,10 @@
-#ifndef FAYT_SCHED_H_
-#define FAYT_SCHED_H_
+#ifndef ARIA_SCHED_H_
+#define ARIA_SCHED_H_
 
-#include <fayt/capability.h>
-#include <fayt/bitmap.h>
-#include <fayt/dictionary.h>
-#include <fayt/time.h>
+#include <aria/capability.h>
+#include <aria/bitmap.h>
+#include <aria/dictionary.h>
+#include <aria/time.h>
 
 constexpr int ARCHCTL_SCHED_ACQUIRE = 1;
 constexpr int ARCHCTL_SCHED_RELEASE = 2;

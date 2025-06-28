@@ -1,5 +1,5 @@
-#include <fayt/stream.h>
-#include <fayt/string.h>
+#include <aria/stream.h>
+#include <aria/string.h>
 
 #include <stdint.h>
 #include <stddef.h>

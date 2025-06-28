@@ -1,7 +1,7 @@
-#include <fayt/address.h>
-#include <fayt/syscall.h>
-#include <fayt/debug.h>
-#include <fayt/portal.h>
+#include <aria/address.h>
+#include <aria/syscall.h>
+#include <aria/debug.h>
+#include <aria/portal.h>
 
 int as_mem_allocate(capability_t capability, uintptr_t *address, size_t length)
 {

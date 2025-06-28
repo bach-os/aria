@@ -1,9 +1,9 @@
-#include <fayt/slab.h>
-#include <fayt/compiler.h>
-#include <fayt/string.h>
-#include <fayt/debug.h>
-#include <fayt/elf.h>
-#include <fayt/address.h>
+#include <aria/slab.h>
+#include <aria/compiler.h>
+#include <aria/string.h>
+#include <aria/debug.h>
+#include <aria/elf.h>
+#include <aria/address.h>
 
 static int elf64_validate(struct elf64_hdr *hdr)
 {

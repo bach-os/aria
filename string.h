@@ -1,5 +1,5 @@
-#ifndef FAYT_STRING_H_
-#define FAYT_STRING_H_
+#ifndef ARIA_STRING_H_
+#define ARIA_STRING_H_
 
 #include <stdint.h>
 #include <stddef.h>

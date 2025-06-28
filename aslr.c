@@ -1,9 +1,9 @@
-#include <fayt/compiler.h>
-#include <fayt/debug.h>
-#include <fayt/address.h>
-#include <fayt/slab.h>
-#include <fayt/string.h>
-#include <fayt/aslr.h>
+#include <aria/compiler.h>
+#include <aria/debug.h>
+#include <aria/address.h>
+#include <aria/slab.h>
+#include <aria/string.h>
+#include <aria/aslr.h>
 
 int aslr_generate_layout(struct aslr *aslr, struct aslr_layout **ret,
 						 size_t length)

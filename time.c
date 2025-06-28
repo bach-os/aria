@@ -1,4 +1,4 @@
-#include <fayt/time.h>
+#include <aria/time.h>
 
 struct time invariant_tsc_read(struct timer *timer)
 {

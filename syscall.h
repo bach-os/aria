@@ -1,5 +1,5 @@
-#ifndef FAYT_SYSCALL_H_
-#define FAYT_SYSCALL_H_
+#ifndef ARIA_SYSCALL_H_
+#define ARIA_SYSCALL_H_
 
 #include <stdint.h>
 #include <stddef.h>

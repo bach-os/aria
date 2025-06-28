@@ -1,8 +1,8 @@
-#ifndef FAYT_PORTAL_H_
-#define FAYT_PORTAL_H_
+#ifndef ARIA_PORTAL_H_
+#define ARIA_PORTAL_H_
 
-#include <fayt/lock.h>
-#include <fayt/capability.h>
+#include <aria/lock.h>
+#include <aria/capability.h>
 
 #include <stdint.h>
 #include <stddef.h>
