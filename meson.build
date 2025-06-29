@@ -1,4 +1,4 @@
-project('aria', ['c', 'cpp'], default_options: ['c_std=gnu23', 'warning_level=2', 'werror=true'])
+project('aria', 'c', default_options: ['c_std=gnu23', 'warning_level=2', 'werror=true'])
 
 src = files(
   'src/bitmap.c',
