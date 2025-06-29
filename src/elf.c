@@ -1,9 +1,8 @@
 #include <aria/slab.h>
 #include <aria/compiler.h>
-#include <aria/string.h>
+#include <aria/base.h>
 #include <aria/debug.h>
 #include <aria/elf.h>
-#include <aria/address.h>
 
 static int elf64_validate(struct elf64_hdr *hdr)
 {
@@ -62,7 +61,7 @@ static int elf64_find_section(struct elf64_file *file, struct elf64_shdr **shdr,
 
 int elf64_file_init(struct elf64_file *file)
 {
-	file->hdr = alloc(sizeof(struct elf64_hdr));
+	file->hdr = file->alloc.alloc(sizeof(struct elf64_hdr));
 	if (file->hdr == NULL)
 		RETURN_ERROR;
 
@@ -70,10 +69,12 @@ int elf64_file_init(struct elf64_file *file)
 	if (unlikely(ret != sizeof(struct elf64_hdr)))
 		RETURN_ERROR;
 
-	file->phdr = alloc(sizeof(struct elf64_phdr) * file->hdr->ph_num);
+	file->phdr =
+		file->alloc.alloc(sizeof(struct elf64_phdr) * file->hdr->ph_num);
 	if (file->phdr == NULL)
 		RETURN_ERROR;
-	file->shdr = alloc(sizeof(struct elf64_shdr) * file->hdr->sh_num);
+	file->shdr =
+		file->alloc.alloc(sizeof(struct elf64_shdr) * file->hdr->sh_num);
 	if (file->shdr == NULL)
 		RETURN_ERROR;
 
@@ -93,7 +94,7 @@ int elf64_file_init(struct elf64_file *file)
 		RETURN_ERROR;
 
 	file->strtab_hdr = &file->shdr[file->hdr->shstrndx];
-	file->strtab = alloc(file->strtab_hdr->sh_size);
+	file->strtab = file->alloc.alloc(file->strtab_hdr->sh_size);
 	if (file->strtab == NULL)
 		RETURN_ERROR;
 
@@ -116,7 +117,7 @@ int elf64_file_init(struct elf64_file *file)
 	}
 
 	ret = aslr_generate_layout(file->aslr, &file->aslr_layout,
-							   maximum_vaddr - minimum_vaddr);
+							   maximum_vaddr - minimum_vaddr, file->aslr_rand);
 	if (ret == -1)
 		RETURN_ERROR;
 

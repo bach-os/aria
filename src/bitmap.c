@@ -1,6 +1,6 @@
 #include <aria/slab.h>
 #include <aria/bitmap.h>
-#include <aria/string.h>
+#include <aria/base.h>
 #include <aria/debug.h>
 
 int bitmap_alloc(struct bitmap *bitmap, int *ret)

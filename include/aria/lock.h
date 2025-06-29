@@ -8,6 +8,8 @@ struct spinlock {
 	int interrupts;
 };
 
+#define SPINLOCK_INITIALIZER { .lock = 0, .interrupts = 0 }
+
 static inline void raw_spinlock(void *lock)
 {
 	while (__atomic_test_and_set(lock, __ATOMIC_ACQUIRE))

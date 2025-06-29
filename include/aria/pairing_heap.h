@@ -4,7 +4,11 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-/* This is completely yoinked from CLRS */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* This is completely yoinked from Wikipedia */
 
 struct pairing_heap_node {
 	struct pairing_heap_node *child;
@@ -41,5 +45,9 @@ void pairing_heap_remove(struct pairing_heap *heap,
 struct pairing_heap_node *pairing_heap_top(struct pairing_heap *heap);
 
 size_t pairing_heap_size(const struct pairing_heap *heap);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

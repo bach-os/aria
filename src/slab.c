@@ -1,5 +1,5 @@
 #include <aria/slab.h>
-#include <aria/string.h>
+#include <aria/base.h>
 #include <aria/lock.h>
 #include <aria/compiler.h>
 #include <aria/debug.h>

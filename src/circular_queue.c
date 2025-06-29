@@ -1,5 +1,5 @@
 #include <aria/circular_queue.h>
-#include <aria/string.h>
+#include <aria/base.h>
 #include <aria/slab.h>
 #include <aria/debug.h>
 

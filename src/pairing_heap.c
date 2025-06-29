@@ -1,4 +1,4 @@
-#include "pairing_heap.h"
+#include <aria/pairing_heap.h>
 
 static struct pairing_heap_node *meld(struct pairing_heap_node *a,
 									  struct pairing_heap_node *b,
@@ -64,6 +64,10 @@ void pairing_heap_init(struct pairing_heap *heap, pairing_heap_cmp_func *cmp)
 void pairing_heap_insert(struct pairing_heap *heap,
 						 struct pairing_heap_node *node)
 {
+	node->child = NULL;
+	node->next = NULL;
+	node->prev = NULL;
+
 	heap->root = meld(heap->root, node, heap->cmp);
 	heap->size++;
 }

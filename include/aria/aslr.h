@@ -19,7 +19,9 @@ struct aslr {
 	uintptr_t maximum_vaddr;
 };
 
+typedef uint64_t (*aslr_rand_t)(void);
+
 int aslr_generate_layout(struct aslr *aslr, struct aslr_layout **ret,
-						 size_t length);
+						 size_t length, aslr_rand_t rand);
 
 #endif
