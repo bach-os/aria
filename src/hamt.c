@@ -1,7 +1,5 @@
 #include <aria/hamt.h>
 #include <aria/base.h>
-#include <assert.h>
-#include <stdio.h>
 #include <aria/compiler.h>
 
 #define TAG_MASK 0x1
@@ -102,8 +100,6 @@ static void convert_to_branch_and_insert(struct hamt *h,
 
 		node = node->branch.children;
 	}
-
-	assert(curr_idx != old_idx);
 
 	/* Allocate space for two children (one for the new node and one for the old one) */
 	node->branch.children = h->alloc.alloc(sizeof(struct hamt_node) * 2);
