@@ -1,4 +1,4 @@
-project('aria', ['c', 'cpp'], default_options: ['c_std=gnu23', 'warning_level=2', 'werror=true'])
+project('aria', 'c', default_options: ['c_std=gnu23', 'warning_level=2', 'werror=true'])
 
 src = files(
   'src/bitmap.c',
@@ -19,6 +19,9 @@ inc = include_directories('include')
 aria_lib = static_library('aria', src, include_directories: [inc, include_directories('.')])
 aria_dep = declare_dependency(link_with: aria_lib, include_directories: inc)
 
-bench_dep = [dependency('benchmark'), dependency('absl_base'), dependency('absl_raw_logging_internal'), dependency('absl_raw_hash_set')]
+if not meson.is_subproject()
+  add_languages('cpp', native: false)
+  bench_dep = [dependency('benchmark'), dependency('absl_base'), dependency('absl_raw_logging_internal'), dependency('absl_raw_hash_set')]
 
-executable('bench', sources: files('benchmarks/hamt.cc', 'src/hamt.c'), link_with: aria_lib, include_directories: inc, dependencies: bench_dep)
+  executable('bench', sources: files('benchmarks/hamt.cc', 'src/hamt.c'), link_with: aria_lib, include_directories: inc, dependencies: bench_dep)
+endif
