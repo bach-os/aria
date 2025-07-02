@@ -6,7 +6,7 @@
 typedef struct allocator {
 	void *(*alloc)(size_t);
 	void (*free)(void *, size_t);
-	void *(*realloc)(void *, size_t old, size_t new);
+	void *(*realloc)(void *, size_t, size_t);
 } allocator_t;
 
 #endif
