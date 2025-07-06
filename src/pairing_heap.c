@@ -118,14 +118,10 @@ void pairing_heap_remove(struct pairing_heap *heap,
 		node->next->prev = node->prev;
 	}
 
-	if (node->child) {
-		heap->root =
-			meld(heap->root, merge_pairs(node->child, heap->cmp), heap->cmp);
-	}
-
 	node->next = NULL;
 	node->prev = NULL;
-	node->child = NULL;
+
+	heap->root = meld(heap->root, merge_pairs(node, heap->cmp), heap->cmp);
 }
 
 struct pairing_heap_node *pairing_heap_top(struct pairing_heap *heap)
