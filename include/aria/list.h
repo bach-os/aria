@@ -11,6 +11,8 @@ struct list_entry {
 	struct list_entry *prev;
 };
 
+#define LIST_INITIALIZER(HEAD) { .next = &(HEAD), .prev = &(HEAD) }
+
 /**
  * Initializes the list head `head`
 */
@@ -24,7 +26,7 @@ ALWAYS_INLINE static inline void list_init(struct list_entry *head)
  * Inserts an element at the end of the list
 */
 ALWAYS_INLINE static inline void list_insert_tail(struct list_entry *head,
-									struct list_entry *elem)
+												  struct list_entry *elem)
 {
 	head->prev->next = elem;
 	elem->next = head;
@@ -32,12 +34,11 @@ ALWAYS_INLINE static inline void list_insert_tail(struct list_entry *head,
 	head->prev = elem;
 }
 
-
 /**
  * Inserts an element at the beginning of the list
 */
-ALWAYS_INLINE static inline void
-list_insert_head(struct list_entry *head, struct list_entry *elem)
+ALWAYS_INLINE static inline void list_insert_head(struct list_entry *head,
+												  struct list_entry *elem)
 {
 	head->next->prev = elem;
 	elem->next = head->next;
@@ -65,7 +66,8 @@ ALWAYS_INLINE static inline bool list_empty(struct list_entry *head)
 /**
  * Returns the first element of a list
 */
-ALWAYS_INLINE static inline struct list_entry *list_first(struct list_entry *head)
+ALWAYS_INLINE static inline struct list_entry *
+list_first(struct list_entry *head)
 {
 	return (head->next);
 }
@@ -73,7 +75,8 @@ ALWAYS_INLINE static inline struct list_entry *list_first(struct list_entry *hea
 /**
  * Returns the last element of a list (tail)
 */
-ALWAYS_INLINE static inline struct list_entry *list_tail(struct list_entry *head)
+ALWAYS_INLINE static inline struct list_entry *
+list_tail(struct list_entry *head)
 {
 	return (head->prev);
 }
