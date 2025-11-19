@@ -1,89 +1,53 @@
 #ifndef ARIA_BST_H_
 #define ARIA_BST_H_
+#include <stdint.h>
 
-#define BST_GENERIC_INSERT(TABLE_ROOT, BASE, NODE)    \
-	({                                                \
-		int ret = 0;                                  \
-		if ((NODE) == NULL) {                         \
-			ret = -1;                                 \
-		} else {                                      \
-			(NODE)->left = NULL;                      \
-			(NODE)->right = NULL;                     \
-			__typeof__(TABLE_ROOT) root = TABLE_ROOT; \
-			__typeof__(TABLE_ROOT) parent = NULL;     \
-			for (; root;) {                           \
-				parent = root;                        \
-				if (root->BASE > (NODE)->BASE)        \
-					root = root->left;                \
-				else                                  \
-					root = root->right;               \
-			}                                         \
-			(NODE)->parent = parent;                  \
-			if (parent == NULL)                       \
-				TABLE_ROOT = (NODE);                  \
-			else if (parent->BASE > (NODE)->BASE)     \
-				parent->left = (NODE);                \
-			else                                      \
-				parent->right = (NODE);               \
-		}                                             \
-		ret;                                          \
-	})
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#define BST_GENERIC_DELETE(TABLE_ROOT, NODE)                          \
-	({                                                                \
-		int ret = 0;                                                  \
-		if ((NODE) == NULL) {                                         \
-			ret = -1;                                                 \
-		} else {                                                      \
-			__typeof__(NODE) parent = (NODE)->parent;                 \
-			if ((NODE)->left == NULL && (NODE)->right == NULL) {      \
-				if (parent == NULL)                                   \
-					TABLE_ROOT = NULL;                                \
-				else if (parent->left == (NODE))                      \
-					parent->left = NULL;                              \
-				else                                                  \
-					parent->right = NULL;                             \
-			} else if ((NODE)->left && (NODE)->right == NULL) {       \
-				if (parent == NULL)                                   \
-					TABLE_ROOT = (NODE)->left;                        \
-				else if (parent->left == (NODE))                      \
-					parent->left = (NODE)->left;                      \
-				else                                                  \
-					parent->right = (NODE)->left;                     \
-				(NODE)->left->parent = parent;                        \
-			} else if ((NODE)->right && (NODE)->left == NULL) {       \
-				if (parent == NULL)                                   \
-					TABLE_ROOT = (NODE)->right;                       \
-				else if (parent->left == (NODE))                      \
-					parent->left = (NODE)->right;                     \
-				else                                                  \
-					parent->right = (NODE)->right;                    \
-				(NODE)->right->parent = parent;                       \
-			} else {                                                  \
-				__typeof__(NODE) successor = (NODE)->right;           \
-				for (; successor->left;)                              \
-					successor = successor->left;                      \
-				if (successor->parent != (NODE)) {                    \
-					successor->parent->left = successor->right;       \
-					if (successor->right)                             \
-						successor->right->parent = successor->parent; \
-					successor->right = (NODE)->right;                 \
-					if (successor->right)                             \
-						successor->right->parent = successor;         \
-				}                                                     \
-				successor->left = (NODE)->left;                       \
-				if (successor->left)                                  \
-					successor->left->parent = successor;              \
-				successor->parent = parent;                           \
-				if (parent == NULL)                                   \
-					TABLE_ROOT = successor;                           \
-				else if (parent->left == (NODE))                      \
-					parent->left = successor;                         \
-				else                                                  \
-					parent->right = successor;                        \
-			}                                                         \
-		}                                                             \
-		ret;                                                          \
-	})
+#define BST_IS_NIL(T, N) ((N == &(T)->nil))
+#define BST_NIL(T) (&(T)->nil)
+#define BST_TAG_MASK 0x3 /* Low 2 bits */
+#define BST_PARENT(P) \
+	((struct bst_node *)((uintptr_t)((P)->parent) & ~BST_TAG_MASK))
+
+#define BST_SET_PARENT(NODE, PARENT)                                   \
+	((NODE)->parent = (void *)(((uintptr_t)(PARENT) & ~BST_TAG_MASK) | \
+							   ((uintptr_t)(NODE)->parent & BST_TAG_MASK)))
+
+struct bst_node {
+	struct bst_node *left;
+	struct bst_node *right;
+	struct bst_node *
+		parent; /* Possibly a tagged pointer, code should not rely on this pointer being valid without using BST_PARENT! */
+};
+
+typedef int (*bst_cmp_func_t)(struct bst_node *a, struct bst_node *b);
+
+struct bst {
+	struct bst_node *root;
+	struct bst_node nil;
+	bst_cmp_func_t cmp;
+};
+
+void bst_init(struct bst *bst, bst_cmp_func_t cmp);
+
+struct bst_node *bst_search(struct bst *bst, struct bst_node *cmp);
+
+struct bst_node *bst_maximum(struct bst *tree, struct bst_node *root);
+struct bst_node *bst_minimum(struct bst *tree, struct bst_node *root);
+
+struct bst_node *bst_successor(struct bst *tree, struct bst_node *elem);
+struct bst_node *bst_predecessor(struct bst *tree, struct bst_node *elem);
+
+void bst_impl_transplant(struct bst *tree, struct bst_node *u,
+						 struct bst_node *v);
+
+/* TODO: maybe add rotate_left and rotate_right instead of implementing it every time? */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

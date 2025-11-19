@@ -1,3 +1,8 @@
+#include <aria/avl.h>
+#include <aria/base.h>
+#include <aria/list.h>
+#include <sys/queue.h>
+
 #include <benchmark/benchmark.h>
 #include <stdint.h>
 #include <stddef.h>
@@ -69,10 +74,6 @@ static uint64_t murmur_hash(void *key, size_t len)
 	return h;
 }
 
-extern "C" void print(const char *, ...)
-{
-}
-
 uint64_t my_hash(void *key)
 {
 	return murmur_hash(key, strlen((char *)key));
@@ -94,10 +95,12 @@ template <> struct MyHash<std::string> {
 	}
 };
 
+#define N 10000
+
 static void BM_HAMT(benchmark::State &state)
 {
 	struct hamt h;
-	allocator_t alloc = { malloc, my_free, NULL };
+	struct allocator alloc = { malloc, my_free, NULL };
 	FILE *f;
 	char *line = NULL;
 	size_t len = 0;
@@ -109,7 +112,7 @@ static void BM_HAMT(benchmark::State &state)
 
 	std::vector<std::string> lines;
 
-	while (getline(&line, &len, f) && i < 500000) {
+	while (getline(&line, &len, f) && i < N) {
 		if (!len)
 			continue;
 
@@ -117,7 +120,6 @@ static void BM_HAMT(benchmark::State &state)
 		i++;
 	}
 
-	// Perform setup here
 	for (auto _ : state) {
 		for (auto line : lines) {
 			size_t *mlen = (size_t *)malloc(sizeof(size_t));
@@ -126,7 +128,7 @@ static void BM_HAMT(benchmark::State &state)
 			size_t *got = (size_t *)hamt_get(&h, (void *)line.c_str());
 
 			if (*got != *mlen) {
-				printf("failed on %s (%ld != %ld)\n", line.c_str(), *mlen,
+				printf("HAMT: failed on %s (%ld != %ld)\n", line.c_str(), *mlen,
 					   *got);
 			}
 		}
@@ -146,11 +148,11 @@ static void BM_std(benchmark::State &state)
 
 	f = fopen("words.txt", "r");
 
-	std::unordered_map<const char *, size_t *, MyHash<const char *> > m;
+	std::unordered_map<const char *, size_t *, MyHash<const char *> > m{};
 
 	std::vector<std::string> lines;
 
-	while (getline(&line, &len, f) && i < 500000) {
+	while (getline(&line, &len, f) && i < N) {
 		if (!len)
 			continue;
 
@@ -158,7 +160,6 @@ static void BM_std(benchmark::State &state)
 		i++;
 	}
 
-	// Perform setup here
 	for (auto _ : state) {
 		for (auto line : lines) {
 			size_t *mlen = (size_t *)malloc(sizeof(size_t));
@@ -167,7 +168,7 @@ static void BM_std(benchmark::State &state)
 			size_t *got = m[line.c_str()];
 
 			if (*got != *mlen) {
-				printf("failed on %s (%ld != %ld)\n", line.c_str(), *mlen,
+				printf("std: failed on %s (%ld != %ld)\n", line.c_str(), *mlen,
 					   *got);
 			}
 		}
@@ -191,7 +192,7 @@ static void BM_abseil(benchmark::State &state)
 
 	std::vector<std::string> lines;
 
-	while (getline(&line, &len, f) && i < 500000) {
+	while (getline(&line, &len, f) && i < N) {
 		if (!len)
 			continue;
 
@@ -199,7 +200,6 @@ static void BM_abseil(benchmark::State &state)
 		i++;
 	}
 
-	// Perform setup here
 	for (auto _ : state) {
 		for (auto line : lines) {
 			size_t *mlen = (size_t *)malloc(sizeof(size_t));
@@ -208,8 +208,8 @@ static void BM_abseil(benchmark::State &state)
 			size_t *got = m[line.c_str()];
 
 			if (*got != *mlen) {
-				printf("failed on %s (%ld != %ld)\n", line.c_str(), *mlen,
-					   *got);
+				printf("abseil: failed on %s (%ld != %ld)\n", line.c_str(),
+					   *mlen, *got);
 			}
 		}
 
@@ -244,7 +244,7 @@ static void BM_frigg(benchmark::State &state)
 
 	std::vector<std::string> lines;
 
-	while (getline(&line, &len, f) && i < 500000) {
+	while (getline(&line, &len, f) && i < N) {
 		if (!len)
 			continue;
 
@@ -255,7 +255,6 @@ static void BM_frigg(benchmark::State &state)
 		i++;
 	}
 
-	// Perform setup here
 	for (auto _ : state) {
 		for (auto &line : lines) {
 			size_t *mlen = (size_t *)malloc(sizeof(size_t));
@@ -263,8 +262,8 @@ static void BM_frigg(benchmark::State &state)
 			h.insert(line.c_str(), mlen);
 			size_t *got = *h.get(line.c_str());
 			if (*got != *mlen) {
-				printf("failed on %s (%ld != %ld)\n", line.c_str(), *mlen,
-					   *got);
+				printf("frigg: failed on %s (%ld != %ld)\n", line.c_str(),
+					   *mlen, *got);
 			}
 		}
 
@@ -278,4 +277,5 @@ BENCHMARK(BM_HAMT);
 BENCHMARK(BM_frigg);
 BENCHMARK(BM_std);
 BENCHMARK(BM_abseil);
+
 BENCHMARK_MAIN();

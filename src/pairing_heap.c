@@ -3,7 +3,7 @@
 
 static struct pairing_heap_node *meld(struct pairing_heap_node *a,
 									  struct pairing_heap_node *b,
-									  pairing_heap_cmp_func *cmp)
+									  pairing_heap_cmp_func_t *cmp)
 {
 	if (cmp(a, b)) {
 		if (a->child) {
@@ -27,7 +27,7 @@ static struct pairing_heap_node *meld(struct pairing_heap_node *a,
 }
 
 static struct pairing_heap_node *merge_pairs(struct pairing_heap_node *node,
-											 pairing_heap_cmp_func *cmp)
+											 pairing_heap_cmp_func_t *cmp)
 {
 	struct pairing_heap_node *element = node;
 	struct pairing_heap_node *paired = NULL;
@@ -74,7 +74,7 @@ static struct pairing_heap_node *merge_pairs(struct pairing_heap_node *node,
 	return joined;
 }
 
-void pairing_heap_init(struct pairing_heap *heap, pairing_heap_cmp_func *cmp)
+void pairing_heap_init(struct pairing_heap *heap, pairing_heap_cmp_func_t *cmp)
 {
 	heap->size = 0;
 	heap->root = NULL;
@@ -105,6 +105,10 @@ void pairing_heap_remove(struct pairing_heap *heap,
 		return;
 	}
 
+	if (!heap->root) {
+		return;
+	}
+
 	heap->size--;
 
 	/* Unlink the node */
@@ -118,10 +122,15 @@ void pairing_heap_remove(struct pairing_heap *heap,
 		node->next->prev = node->prev;
 	}
 
+	if (node->child) {
+		node->child->prev = NULL;
+		heap->root =
+			meld(heap->root, merge_pairs(node->child, heap->cmp), heap->cmp);
+	}
+
 	node->next = NULL;
 	node->prev = NULL;
-
-	heap->root = meld(heap->root, merge_pairs(node, heap->cmp), heap->cmp);
+	node->child = NULL;
 }
 
 struct pairing_heap_node *pairing_heap_top(struct pairing_heap *heap)

@@ -5,10 +5,9 @@
 
 struct spinlock {
 	char lock;
-	int interrupts;
 };
 
-#define SPINLOCK_INITIALIZER { .lock = 0, .interrupts = 0 }
+#define SPINLOCK_INITIALIZER { .lock = 0 }
 
 static inline void raw_spinlock(void *lock)
 {

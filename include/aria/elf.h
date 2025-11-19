@@ -1,7 +1,6 @@
 #ifndef ARIA_ELF_H_
 #define ARIA_ELF_H_
 
-#include <aria/aslr.h>
 #include <aria/alloc.h>
 
 #include <stdint.h>
@@ -191,14 +190,12 @@ struct elf64_file {
 	int (*elf64_map)(struct elf64_file *, struct elf64_phdr *,
 					 struct elf64_shdr *, bool);
 
-	allocator_t alloc;
+	struct allocator alloc;
 
 	void *private;
 
 	struct aslr *aslr;
 	struct aslr_layout *aslr_layout;
-
-	aslr_rand_t aslr_rand;
 
 	int asid;
 };

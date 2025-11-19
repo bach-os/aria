@@ -30,12 +30,12 @@ struct hamt {
 	struct hamt_node *root;
 	size_t size;
 
-	allocator_t alloc;
+	struct allocator alloc;
 	hamt_cmp_func_t cmp;
 	hamt_hash_func_t hash;
 };
 
-void hamt_init(struct hamt *hamt, allocator_t alloc, hamt_cmp_func_t cmp,
+void hamt_init(struct hamt *hamt, struct allocator alloc, hamt_cmp_func_t cmp,
 			   hamt_hash_func_t hash);
 
 void hamt_insert(struct hamt *hamt, void *key, void *value);

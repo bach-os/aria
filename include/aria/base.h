@@ -10,7 +10,13 @@ extern "C" {
 #endif
 
 #define DIV_ROUNDUP(a, b) (((a) + ((b) - 1)) / (b))
-#define ALIGN_UP(a, b) (DIV_ROUNDUP(a, b) * b)
+#define ALIGN_UP(a, b) (((a) + ((b) - 1)) & ~((b) - 1))
+#define ALIGN_DOWN(a, b) ((a) & ~((b) - 1))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define MIN(a, b) ((a) > (b) ? (b) : (a))
+#define ALWAYS_INLINE __attribute__((always_inline))
+#define UNLIKELY(x) __builtin_expect(!!(x), 0)
+#define LIKELY(x) __builtin_expect(!!(x), 1)
 #define LENGTHOF(a) (sizeof(a) / sizeof(a[0]))
 #define ABS(a, b) ((a) > (b) ? (a) - (b) : (b) - (a))
 #define BIT_SET(a, b) ((a)[(b) / 8] |= (1 << ((b) % 8)))
@@ -92,6 +98,7 @@ static inline void *memcpy64(uint64_t *dest, const uint64_t *src, size_t n)
 	return dest;
 }
 
+#ifndef __STDC_HOSTED__
 static inline size_t strlen(const char *str)
 {
 	size_t len = 0;
@@ -105,6 +112,19 @@ static inline int abs(int n)
 	return (n < 0) ? -n : n;
 }
 
+int strcmp(const char *str0, const char *str1);
+int strncmp(const char *str0, const char *str1, size_t n);
+int memcmp(const void *str0, const void *str, size_t n);
+char *strcpy(char *dest, const char *src);
+char *strncpy(char *dest, const char *src, size_t n);
+char *strchr(const char *str, int c);
+void *memcpy(void *dest, const void *src, size_t n);
+void *memset(void *src, int data, size_t n);
+
+#else
+#include <string.h>
+#endif
+
 static inline int pow2_roundup(int n)
 {
 	n--;
@@ -117,14 +137,10 @@ static inline int pow2_roundup(int n)
 	return n;
 }
 
-int strcmp(const char *str0, const char *str1);
-int strncmp(const char *str0, const char *str1, size_t n);
-int memcmp(const void *str0, const void *str, size_t n);
-char *strcpy(char *dest, const char *src);
-char *strncpy(char *dest, const char *src, size_t n);
-char *strchr(const char *str, int c);
-void *memcpy(void *dest, const void *src, size_t n);
-void *memset(void *src, int data, size_t n);
+static inline uint32_t log2_u32(uint32_t x)
+{
+	return 31 - __builtin_clz(x);
+}
 
 #ifdef __cplusplus
 }

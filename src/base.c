@@ -1,5 +1,4 @@
 #include <aria/base.h>
-#include <aria/compiler.h>
 
 int strcmp(const char *str0, const char *str1)
 {
