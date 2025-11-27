@@ -81,12 +81,21 @@ list_tail(struct list_entry *head)
 	return (head->prev);
 }
 
-#define LIST_ENTRY(PTR, TYPE, FIELD) \
-	((TYPE *)((char *)(PTR) - offsetof(TYPE, FIELD)))
+/**
+ * Inserts an element before another one
+ */
+ALWAYS_INLINE static inline void list_insert_before(struct list_entry *elem,
+													struct list_entry *before)
+{
+	elem->prev = before->prev;
+	elem->next = before;
+	before->prev->next = elem;
+	before->prev = elem;
+}
 
-#define LIST_FOREACH(VAR, HEAD, FIELD)                            \
-	for ((VAR) = LIST_ENTRY((HEAD)->next, typeof(*(VAR)), FIELD); \
-		 &(VAR)->FIELD != (HEAD);                                 \
-		 (VAR) = LIST_ENTRY((VAR)->FIELD.next, typeof(*(VAR)), FIELD))
+#define LIST_FOR_EACH(VAR, HEAD, FIELD)                             \
+	for ((VAR) = CONTAINER_OF((HEAD)->next, typeof(*(VAR)), FIELD); \
+		 &(VAR)->FIELD != (HEAD);                                   \
+		 (VAR) = CONTAINER_OF((VAR)->FIELD.next, typeof(*(VAR)), FIELD))
 
 #endif
