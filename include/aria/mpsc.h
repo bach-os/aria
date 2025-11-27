@@ -64,7 +64,7 @@ static inline int mpsc_try_pop(struct mpsc *q, void **out)
 	size_t turn = (tail >> q->shift) * 2;
 
 	if (atomic_load_explicit(&slot->turn, memory_order_acquire) != turn + 1) {
-		if (atomic_load_explicit(&q->head, memory_order_acquire) == q->tail) {
+		if (atomic_load_explicit(&q->head, memory_order_acquire) == tail) {
 			/* Empty */
 			return -1;
 		}
@@ -73,7 +73,7 @@ static inline int mpsc_try_pop(struct mpsc *q, void **out)
 		return 1;
 	}
 
-	tail++;
+	q->tail++;
 
 	*out = slot->item;
 
@@ -88,7 +88,7 @@ static inline int mpsc_try_pop(struct mpsc *q, void **out)
  */
 static inline void *mpsc_pop(struct mpsc *q)
 {
-	void *ret;
+	void *ret = NULL;
 	int res = 0;
 
 	do {
