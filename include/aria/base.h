@@ -98,7 +98,7 @@ static inline void *memcpy64(uint64_t *dest, const uint64_t *src, size_t n)
 	return dest;
 }
 
-#ifndef __STDC_HOSTED__
+#if !__STDC_HOSTED__
 static inline size_t strlen(const char *str)
 {
 	size_t len = 0;

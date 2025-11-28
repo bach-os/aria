@@ -1,7 +1,6 @@
 #include <aria/rbtree.h>
 #include <stdint.h>
 #include <stddef.h>
-#include <stdio.h>
 
 /* 
  * Implementation mostly based on pseudocode from Cormen et al.
