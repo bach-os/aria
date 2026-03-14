@@ -1,5 +1,5 @@
-#ifndef MPSC_H_
-#define MPSC_H_
+#ifndef ARIA_MPSC_H_
+#define ARIA_MPSC_H_
 #include <aria/base.h>
 #include <stdatomic.h>
 
@@ -21,7 +21,8 @@ struct mpsc {
 };
 
 /**
- * Initializes `queue` with capacity `capacity`, using the allocated buffer at `slots`
+ * initializes `queue` with capacity `capacity`, using the allocated buffer at `slots`
+ * Note: capacity MUST be a power of two
  */
 static inline void mpsc_init(struct mpsc *queue, size_t capacity,
 							 struct mpsc_slot *slots)
